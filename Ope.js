@@ -1,4 +1,5 @@
 //Por: José Carrillo. Proyecto #1 de Lenguajes de Clientes Web
+
 class Ope{
 
 MatrizCheck(MatrizA, MatrizB){
@@ -111,7 +112,7 @@ getTranspuesta(Matriz){
       }
       if (dif!=0){
 
-        console.log("La matriz no son cuadrada.");
+        console.log("La matriz no es cuadrada.");
       }else{
 
    for (let i = 0; i<Matriz.length; i++){
@@ -287,6 +288,17 @@ getRoots(a, b){ // Metodo de Bisección
 
 }
 
-module.exports = Ope;
+//module.exports = Ope;
 
-let opejs = new Ope();
+const ope = new Ope();
+
+
+Upper = 12;
+    Lower = 0;
+    function f(x){
+     
+       return (x*x); // x^2
+    
+    }
+    
+    console.log (getIntegral(Lower, Upper, f));
