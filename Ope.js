@@ -1,8 +1,8 @@
-//Por: José Carrillo. Proyecto #1 de Lenguajes de Clientes Web
+//Por: José Carrillo. Proyecto #1 de Lenguajes de Clientes Web - Ope.js
 
 class Ope{
 
-MatrizCheck(MatrizA, MatrizB){
+Suma (MatrizA, MatrizB){
 
 let dif = 0;
 
@@ -15,234 +15,199 @@ let dif = 0;
 
     }
 
-    if (dif!=0) return false;
-else return true;
-  }else return false;
+    if (dif==0){
 
-}
-  
-Dimensiones(){
-  console.log ("Las matrices son de dimensiones distintas.");
-}
+      let MatrizC = MatrizA;
 
-Suma (MatrizA, MatrizB){
-    
-if (MatrizCheck(MatrizA, MatrizB) == true){
-
-  for (let i = 0; i<MatrizA.length; i++){
-    for (let j = 0; j<MatrizA[i].length; j++){
-    
-       MatrizC[i][j] = (MatrizA[i][j] + MatrizB[i][j]);        
+      for (let i = 0; i<MatrizC.length; i++){
+        for (let j = 0; j<MatrizC[i].length; j++){
+        
+        MatrizC[i][j] = (MatrizA[i][j] + MatrizB[i][j]);        
+        }
+        }
+        return MatrizC;
     }
-   console.log (MatrizC[i]);
+    else return "Las matrices son de anchuras distintas.";
+
+
     }
-}
-else Dimensiones();
-}
+    else return "Las matrices son de alturas distintas.";
+  }
 
 Resta (MatrizA, MatrizB){
-    
-  if (MatrizCheck(MatrizA, MatrizB) == true){
-  
-    for (let i = 0; i<MatrizA.length; i++){
-      for (let j = 0; j<MatrizA[i].length; j++){
-      
-         MatrizC[i][j] = (MatrizA[i][j] - MatrizB[i][j]);        
-      }
-     console.log (MatrizC[i]);
-      }
-  }
-  else Dimensiones();
-  }
 
-  Prod (MatrizA, MatrizB){
-   
+    let dif = 0;
     
-    if (MatrizCheck(MatrizA, MatrizB) == true){
+      if (MatrizA.length==MatrizB.length){
     
-      let dif = 0;
+        for (let i = 0; i<MatrizA.length; i++){
+    
+          if (MatrizA[i].length!=MatrizB[i].length)
+          dif++;
+    
+        }
+    
+        if (dif==0){
+    
+          let MatrizC = MatrizA;
+    
+          for (let i = 0; i<MatrizC.length; i++){
+            for (let j = 0; j<MatrizC[i].length; j++){
+            
+            MatrizC[i][j] = (MatrizA[i][j] - MatrizB[i][j]);        
+            }
+            }
+            return MatrizC;
+        }
+        else return "Las matrices son de anchuras distintas.";
+    
+    
+        }
+        else return "Las matrices son de alturas distintas.";
+}
+
+Prod (MatrizA, MatrizB){
+
+  let dif = 0;
+  
+    if (MatrizA.length==MatrizB.length){
+  
       for (let i = 0; i<MatrizA.length; i++){
   
-        if (MatrizA[i].length!=MatrizA.length)
-
-    dif++;
-      }
-      if (dif!=0){
-
-        console.log("Las matrices no son cuadradas.");
-      }else{
-/*
-        for (let i = 0; i < MatrizA.length; i++) {
-          for (let j = 0; j < MatrizA[i].length; j++) {
-              MatrizC[i][j] = 0;
-          }
+        if (MatrizA[i].length!=MatrizB[i].length)
+        dif++;
+  
       }
   
-      for (let i = 0; i < MatrizA.length; i++) {
-          for (let j = 0; j < MatrizA[i].length; j++) {
-              for (let k = 0; k < MatrizA[j].length; k++) {
-                  MatrizC[i][j] = MatrizA[i][k] * MatrizB[k][j];
-              }
-          }
+      if (dif==0){
+
+        let MatrizC = MatrizA.map((fila, i) => MatrizB[0].map((_, j) =>
+      fila.reduce((sum, valor, k) => sum + valor * MatrizB[k][j], 0))
+  );
+  return MatrizC;
       }
+      else return "Las matrices son de anchuras distintas.";
 
-      console.log (MatrizC);
-    }*/
-
-    for (let i = 0; i<MatrizA.length; i++){
-      for (let j = 0; j<MatrizA[i].length; j++){
-      
-         MatrizC[i][j] = (MatrizA[i][j] * MatrizB[i][j]);        
       }
-     console.log (MatrizC[i]);
-      }
-  }
-  }  else Dimensiones();
-}
-   
+      else return "Las matrices son de alturas distintas.";
+    }
 
-getTranspuesta(Matriz){
 
-  let dif = 0;
-      for (let i = 0; i<Matriz.length; i++){
-  
-        if (Matriz[i].length!=Matriz.length)
+  getTranspuesta(Matriz) {
+  return Matriz[0].map((_, i) => Matriz.map(fila => fila[i]));
+  } 
 
-    dif++;
-      }
-      if (dif!=0){
+  getCofactor(Matriz, fila, columna){
+    let cofactor = [];
 
-        console.log("La matriz no es cuadrada.");
-      }else{
-
-   for (let i = 0; i<Matriz.length; i++){
-            for (let j = 0; j<i; j++){
-              let extra = Matriz[i][j];
-              Matriz[i][j] = Matriz[j][i];
-             Matriz[j][i] = extra;
+    for (let i = 0; i < Matriz.length; i++) {
+        if (i !== fila) {
+            let filaCofactor = [];
+            for (let j = 0; j < Matriz[0].length; j++){
+                if (j !== columna) {
+                    filaCofactor.push(Matriz[i][j]);
+                }
             }
-      }
-      for (let i = 0; i<Matriz.length; i++){
-      console.log (Matriz[i]);
-      }
-}
+            if (filaCofactor.length > 0){
+                cofactor.push(filaCofactor);
+        
+            }
+        }
+    }
+    return cofactor;
 }
 
-getInversa(matrix){
+  ProductoEscalar(Matriz, Escalar) {
+    
+    const MatrizProdEscalar = [];
+    for (let i = 0; i < Matriz.length; i++) {
+        const fila = [];
+        for (let j = 0; j < Matriz[0].length; j++) {
+            fila.push(Matriz[i][j] * Escalar);
+        }
+        MatrizProdEscalar.push(fila);
+    }
+    return MatrizProdEscalar;
+}
+getTranspuestaInversa(Matriz){
 
-  //Para Matriz de 2x2
+    let MatrizTranspuesta = [];
+    for (let i = 0; i < Matriz[0].length; i++) {
+        let fila = [];
+        for (let j = 0; j < Matriz.length; j++) {
+            fila.push(Matriz[j][i]);
+        }
+        MatrizTranspuesta.push(fila);
+    }
+    return MatrizTranspuesta;
+}
+
+getDeterminante(Matriz){
+    // Caso Base (1x1 o 2x2)
+    if (Matriz.length === 1) {
+        return Matriz[0][0];
+    }
+    if (Matriz.length === 2) {
+        return Matriz[0][0] * Matriz[1][1] - Matriz[0][1] * Matriz[1][0];
+    }
+
+    // Casos de 3x3 en adelante... (Por método de Cofactores)
+    let determinante = 0;
+    for (let j=0; j<Matriz.length; j++) {
+        const cofactor = this.getCofactor(Matriz, 0, j);
+        determinante += Matriz[0][j] * (-1)**(2+j) * this.getDeterminante(cofactor);
+    }
+    return determinante;
+
+}
+getAdjunta(Matriz){
+    
+    // Matriz de Cofactores
+    const MatrizCofactores = [];
+    for (let i = 0; i < Matriz.length; i++) {
+        const fila = [];
+        for (let j = 0; j < Matriz.length; j++) {
+            const cofactor = this.getCofactor(Matriz, i, j);
+            fila.push((-1)**(i+j+2) * this.getDeterminante(cofactor));
+        }
+        MatrizCofactores.push(fila);
+    }
+    // Matriz adjunta
+    const MatrizAdjunta = this.getTranspuestaInversa(MatrizCofactores);
+    return MatrizAdjunta;
+}
+
+getInversa(Matriz){
 
   let dif = 0;
-      for (let i = 0; i<Matriz.length; i++){
-  
-        if (Matriz[i].length!=Matriz.length || Matriz.length != 2 || Matriz[i].length != 2)
-    dif++;
-      }
-      if (dif!=0){
+  for (let i = 0; i<Matriz.length; i++){
 
-        console.log("La matriz no es valida para 2x2.");
-      }else{
+    if (Matriz[i].length!=Matriz.length)
 
-    let extra = Matriz[0][0];
-    Matriz[0][0] = Matriz[1][1];
-    Matriz[1][1] = extra;
-
-    Matriz[0][1] *= -1;
-    Matriz[1][0] *= -1;
-
-    let determinante = (Matriz[0][0] * Matriz[1][1]) - (Matriz[0][1] * Matriz[1][0]);
-
-    Matriz[0][0] *= (1/determinante);
-    Matriz[0][1] *= (1/determinante);
-    Matriz[1][0] *= (1/determinante);
-    Matriz[1][1] *= (1/determinante);
-
-    for (let i = 0; i<Matriz.length; i++){
-      console.log (Matriz[i]);
-      }
-
-}
- 
- /* //Para Matriz de 3x3
- 
-// Function to print matrix
-function printMatrix(Matriz) {
-  for (let i = 0; i < Matriz.length; i++) {
-    console.log(Matriz[i].join(" "));
+dif++;
   }
-  }
-  
-  // Function to print inverse matrix
-  function printInverse(Matriz) {
-  for (let i = 0; i < Matriz.length; i++) {
-    for (let j = Matriz.length; j < 2 * Matriz.length; j++) {
-    console.log(Matriz[i][j].toFixed(3) + " ");
+  if (dif!=0){
+        return "La matriz no es cuadrada.";
+
     }
-    console.log("\n");
-  }
-  }
-  
-  // Function to find inverse of matrix
-  function inverseOfMatrix(Matriz) {
-  let order = Matriz.length;
-  let temp;
-  
-  
-  console.log("=== Matrix ===");
-  printMatrix(Matriz);
-  
-  for (let i = 0; i < order; i++) {
-    for (let j = 0; j < 2 * order; j++) {
-    if (j == i + order) {
-      Matriz[i][j] = 1;
-    }
-    }
-  }
-  
-  for (let i = order - 1; i > 0; i--) {
-    if (Matriz[i - 1][0] < Matriz[i][0]) {
-    let tempArr = Matriz[i];
-    Matriz[i] = Matriz[i - 1];
-    Matriz[i - 1] = tempArr;
-    }
-  }
-  
-  console.log("\n=== Augmented Matrix ===");
-  printMatrix(Matriz);
-  
-  for (let i = 0; i < order; i++) {
-    for (let j = 0; j < order; j++) {
-    if (j != i) {
-      temp = Matriz[j][i] / Matriz[i][i];
-      for (let k = 0; k < 2 * order; k++) {
-        Matriz[j][k] -= Matriz[i][k] * temp;
-      }
-    }
-    }
-  }
-  
-  for (let i = 0; i < order; i++) {
-    temp = Matriz[i][i];
-    for (let j = 0; j < 2 * order; j++) {
-      Matriz[i][j] = Matriz[i][j] / temp;
-    }
-  }
-  
-  console.log("\n=== Inverse Matrix ===");
-  printInverse(Matriz);
-  }
 
-  inverseofMatrix(Matriz);*/
+    const determinante = this.getDeterminante(Matriz);
+    if (determinante === 0) return "El determinante no puede ser 0, no existe inversa.";
+    const adjunta = this.getAdjunta(Matriz);
+
+    const MatrizInversa = this.ProductoEscalar(adjunta, 1/determinante);
+    return MatrizInversa; 
+
 }
 
 getIntegral(a, b, f){ // Metodo de Simpson 1/3
 
     const n = 6;
-    sum = 0;
+    let sum = 0;
 
-    h=(b-a)/n;
-  for(i=1;i<n;i++){
-    x=a+i*h;
+    let h=(b-a)/n;
+  for(let i=1;i<n;i++){
+   let x=a+i*h;
     if(i%2==0){
       sum=sum+2*f(x);
     }
@@ -250,7 +215,7 @@ getIntegral(a, b, f){ // Metodo de Simpson 1/3
       sum=sum+4*f(x);
     }
   }
-  integral=(h/3)*(f(a)+f(b)+sum);
+ let integral=(h/3)*(f(a)+f(b)+sum);
 
   return integral;
 
@@ -259,46 +224,41 @@ getIntegral(a, b, f){ // Metodo de Simpson 1/3
 getRoots(a, b){ // Metodo de Bisección
 
   let Error = 0.01;
+    
+    function f(x){
 
-  if (func(a) * func(b) >= 0){
+    return x*x*x - x*x + 2; //x^3 - x^2  + 2
+    
+    }
+
+
+  if (f(a) * f(b) >= 0){
             
-            console.log("Los valores introducidos son incorrectos.");
+            return "Los valores introducidos son incorrectos.";
         }else{
 
     let c = a;
         while ((b-a) >= Error){
 
-            // Hallar punto medio
-            Xr = (a+b)/2;
+            // Se halla punto medio
+           var Xr = (a+b)/2;
    
             // Se checkea la raiz
-            if (func(Xr) == 0.0)
+            if (f(Xr) == 0.0)
                 break;
    
             // Se repiten los pasos
-            else if (func(Xr)*func(a) < 0)
+            else if (f(Xr)*f(a) < 0)
                 b = Xr;
             else
                 a = Xr;
+
+              
         }
-
-        console.log(Xr);
+        return Xr;    
 }
 }
 
 }
 
-//module.exports = Ope;
-
-const ope = new Ope();
-
-
-Upper = 12;
-    Lower = 0;
-    function f(x){
-     
-       return (x*x); // x^2
-    
-    }
-    
-    console.log (getIntegral(Lower, Upper, f));
+module.exports = Ope;
