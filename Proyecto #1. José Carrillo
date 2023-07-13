@@ -1,72 +1,96 @@
+//Por: José Carrillo. Proyecto #1 de Lenguajes de Clientes Web
+
 let Ope = require('./Ope.js');
 
-const ope = new Ope();
+const ope = new Ope;
 
 let MatrizA = [
 
-    [2, 0, 1],
-    [3, 0, 0],
-    [5, 1, 1],
+    [5, 2, 1],
+    [2, 1, 2],
+    [4, 1, 3]
     
     
     ];
     
     let MatrizB = [
     
-    [1, 0, 1],
-    [1, 2, 1],
-    [1, 1, 4]
+    [1, 4, 2],
+    [0, 3, 0],
+    [2, 1, 3]
     
     
     ];
     
-   let MatrizC = [...MatrizA];
     
+    //let MatrizC = ope.Suma(MatrizA, MatrizB);
+
+    //let MatrizC = ope.Resta(MatrizA, MatrizB);
+
+    //let MatrizC = ope.Prod(MatrizA, MatrizB);
+
+    if (typeof MatrizC === "string")
+
+      console.log (MatrizC);
+      
+      else if (typeof MatrizC === "object"){
+
+        for (let i = 0; i<MatrizC.length; i++){
+
+          console.log (MatrizC[i]);
     
-    Ope.Suma(MatrizA, MatrizB);
-    
-    //(Resta(MatrizA, MatrizB));
-    
-    //(Prod(MatrizA, MatrizB));
-    
+        }
+      }
+
+
     let Matriz = [
-    
     /*
-    [1, 1, 1],
-    [2, 2, 2],
-    [3, 3, 3]
-    */
-    
-    [1, 4],
-    [6, 8]
-    
-    
+    [1, 1, 1, 1],
+    [2, 2, 2, 2],
+    [3, 3, 3, 3],
+  */
+
+      [2, 3, 1],
+      [4, 7, 2],
+      [3, 1, 1]
+  
+
+
     ];
+
+    //NuevaMatriz = ope.getTranspuesta(Matriz);
+
+    //NuevaMatriz = ope.getInversa(Matriz);
+
+      if (typeof NuevaMatriz === "string")
+
+      console.log (NuevaMatriz);
+      
+      else if (typeof NuevaMatriz === "object"){
+
+        for (let i = 0; i<NuevaMatriz.length; i++){
+
+          console.log (NuevaMatriz[i]);
     
-    //(getTranspuesta(Matriz));
+        }
+      }
     
+   
     
-    //(getInversa(Matriz));
-    
-    /*
-    Upper = 12;
-    Lower = 0;
+  /*  
+    let Upper = 12;
+    let Lower = 0;
     function f(x){
      
        return (x*x); // x^2
     
     }
     
-    console.log (getIntegral(Lower, Upper, f));
+  console.log(ope.getIntegral(Lower, Upper, f));*/
+   
+  /*
+  let a = -200;
+  let b = 300;  
+  
+    console.log(ope.getRoots(a, b));
     */
-    
-    
-    let a = -200;
-    let b = 300;
-    
-    function func(x){
-    return x*x*x - x*x + 2; //x^3 - x^2  + 2
-    }
-      
-    //(getRoots(a, b));
-    
